@@ -1,13 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
-
-require_relative './quotes.rb'
-require_relative './categories.rb'
-require_relative './authors.rb'
-require_relative './cli.rb'
-
-
 class Scraper
 
   def self.scrape_author_by_letter(letter)

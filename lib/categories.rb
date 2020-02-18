@@ -1,10 +1,3 @@
-require 'pry'
-require 'colorize'
-
-require_relative './quotes.rb'
-require_relative './scraper.rb'
-require_relative './authors.rb'
-require_relative './cli'
 class Category
   attr_accessor :category
   

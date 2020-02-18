@@ -1,5 +1,6 @@
 require 'pry'
 require 'colorize'
+require 'nokogiri'
 
 require_relative './quotes.rb'
 require_relative './categories.rb'
