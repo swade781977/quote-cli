@@ -37,7 +37,7 @@ class Scraper
   end
 
   def self.scrape_quotes_by_author(author)
-    
+    quotes = []
     scribe = Author.all.find{|a|  a.name == author}
     page = Nokogiri::HTML(open(scribe.page))
     page.css('.m-brick').each do |block|
@@ -45,6 +45,7 @@ class Scraper
       category_temp = []
       quote1 = block.css('a')[0].text
       quote = Quote.search_quotes(quote1)
+      quotes << quote
       author1 = block.css('a')[1].text
       author = Author.search_authors(author1)
       quote.author = author
@@ -57,6 +58,7 @@ class Scraper
       end
       quote.categories = category
     end
+    quotes
   end
 
   def self.scrape_quotes_by_topic(topic)

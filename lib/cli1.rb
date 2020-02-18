@@ -129,7 +129,7 @@ class CLI
   end
   
   def self.display_quotes_by_author(author, start=0, stop=9)
-    quotes_list = Quote.get_quotes_by_author(author)
+    quotes_list = Scrape.scrape_quotes_by_author(author)
     answer = 1
     start = 0 
     stop = 9
