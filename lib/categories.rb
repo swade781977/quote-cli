@@ -1,15 +1,16 @@
 class Category
-  attr_accessor :category
+  
+  attr_accessor :Category
   
   @@category_all = []
   
   def initialize(cat)
-    @category = cat
+    @category = cat 
     @@category_all << self
   end
   
   def self.all 
-    @@category_all 
+    @@category_all
   end 
   
   def self.find_category(name)
@@ -18,16 +19,15 @@ class Category
   
   def self.search_categories(category)
     t = @@category_all.find{|a| a.category == category}
-    if t != nil 
-      category = t
+    if t != NIL
+      category = t 
     else
-      category = Category.new(category)
+      category = Category.new(category) 
     end
-    category
-  end
+    category 
+  end 
   
   def self.get_top_topics
     arr = Scraper.scrape_top_topics
-  end
-end
-
+  end 
+end 
