@@ -24,4 +24,12 @@ class Quote
       author = Quote.find_quote(quote)
     end
   end
+  
+  def get_author(quote)
+    quote.author.name
+  end
+  
+  def get_categories(quote)
+    quote.categories
+  end
 end

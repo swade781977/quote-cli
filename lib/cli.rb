@@ -130,9 +130,9 @@ class CLI
           puts "#{index + 1}"
           puts "#{quote.quote}"
           puts 
-          puts "#{quote.author.name}"
+          puts "#{quote.get_author(quote)}"
           puts "Categories".colorize(:yellow)
-          quote.categories.each_with_index{|item, index| puts "#{index + 1}| #{item.category}"}
+          quote.get_categories(quote).each_with_index{|item, index| puts "#{index + 1}| #{item.category}"}
           puts "____________________________________________________________________________"
         end
         puts

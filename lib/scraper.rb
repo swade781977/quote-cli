@@ -29,7 +29,6 @@ class Scraper
   def self.scrape_quotes_by_author(author)
     quotes = []
     scribe = Author.all.find{|a| a.name == author}
-    binding.pry
     page = Nokogiri::HTML(open(scribe.page))
     page.css('.m-brick').each do |block|
       category = []
