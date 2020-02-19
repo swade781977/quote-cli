@@ -1,3 +1,15 @@
+# Quote application
+  Hi thanks for using my gem. This gem allows the user to search and see quotes based on author or topic. The information is scraped from http://www.brainyquote.com . 
+  
+  When starting be sure to cd into the application "cd quote-cli" and run bundle to access other gems such as Nokogiri and colorize.
+  
+  Thanks 
+  
+  Chris Wade
+  
+  Craetor
+
+
 # Quote::Cli
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/quote/cli`. To experiment with that code, run `bin/console` for an interactive prompt.
