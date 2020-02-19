@@ -1,6 +1,7 @@
 require 'pry'
 require 'colorize'
 require 'nokogiri'
+require 'open-uri'
 
 require_relative './quotes.rb'
 require_relative './categories.rb'

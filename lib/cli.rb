@@ -44,9 +44,9 @@ class CLI
         letter = CLI.choose_letter
         CLI.display_authors_by_letter(letter, start= 0, stop= 24)
       when 2
-        CLI.random_list_of_authors
+        CLI.random_list_of_top_authors
       when 3
-        CLI.browse_top_topics
+        CLI.browse_by_topic
       when 4 
         CLI.random_top_topics
       end
@@ -244,7 +244,7 @@ class CLI
   end
   
   def self.random_top_topics
-    topics_arr = Scraper.scrape_top_topics
+    topics_arr = Scraper.scrape_top_topic
     answer = 1 
     while answer == 1
       rand_top_topics = topics_arr.sample(10)
@@ -279,7 +279,7 @@ class CLI
   end
 end
   def self.random_list_of_top_authors
-    authors_list = Scrape.scrape_top_authors
+    authors_list = Scraper.scrape_top_authors
     answer = 1 
     while answer == 1
       rand_top_authors = authors_list.sample(25)
@@ -314,8 +314,8 @@ end
   end
 end
 
-  def browse_by_topic
-    topics_arr = Scraper.scrape_top_topics
+  def self.browse_by_topic
+    topics_arr = Scraper.scrape_top_topic
     start = 0 
     stop = 24
     answer = 1

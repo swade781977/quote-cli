@@ -4,7 +4,10 @@ class Scraper
     base_html = "http://www.brainyquote.com"
     puts "Gathering letter #{letter.upcase}"
     scrape_page = base_html + "/authors/#{letter}"
-    page1 = Nokogiri::HTML(open(scrape_page))
+    binding.pry 
+    url_open = open(scrape_page)
+    
+    page1 = Nokogiri::HTML(url_open)
     num_pages = page1.css('li a')[-5].text 
     num_pages = num_pages.to_i 
     page1.css('tbody tr').each do |item|
