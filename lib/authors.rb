@@ -1,4 +1,4 @@
-class authenticate_or_request_with_http_digest
+class Author
   
   @@all_authors = []
   

@@ -17,10 +17,10 @@ class CLI
     puts
     puts "       ----------------------------------------------".colorize(:cyan)
     puts
-    puts "                       Main Menu                     "colorize.(:cyan)
+    puts "                       Main Menu                     ".colorize(:cyan)
     puts "       ----------------------------------------------".colorize(:cyan)
     puts
-    puts "       1. Browse authors alphabetically."colorize(:yellow)
+    puts "       1. Browse authors alphabetically.".colorize(:yellow)
     puts "       2. View a random list of top authors to select from.".colorize(:yellow)
     puts "       3. Browse by topic".colorize(:yellow)
     puts "       4. View a random list of top topics to select from".colorize(:yellow)
@@ -329,7 +329,7 @@ end
       puts "Enter 1 to select the category and see quotes from that category.".colorize(:green)
       puts "Enter 2 for the next 25 categories.".colorize(:green)
       puts "Enter 3 to go back to the previous screen.".colorize(:green)
-      puts "Enter 4 to go back to the main menu."colorize(:green)
+      puts "Enter 4 to go back to the main menu.".colorize(:green)
       puts "Enter exit to exit the program.".colorize(:green)
       input = gets.downcase.strip!
       if input == "exit"

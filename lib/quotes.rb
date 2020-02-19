@@ -18,7 +18,7 @@ class Quote
   end
   
   def self.search_quotes(quote)
-    if @@ quotes_all.include?(quote) == false
+    if @@quotes_all.include?(quote) == false
       author = Quote.new(quote)
     else
       author = Quote.find_quote(quote)
