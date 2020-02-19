@@ -80,7 +80,7 @@ class CLI
         end
         case @input
         when 1 
-          puts "Enter auhtor number."
+          puts "Enter author number."
           a = gets.strip!.to_i
           author = authors_list[start + a - 1].name
           CLI.display_quotes_by_author(author)
@@ -120,28 +120,29 @@ class CLI
     end
     
     def self.display_quotes_by_author(author, start = 0, stop = 9)
-      quotes_list = Scrape.scrape_quotes_by_author(author)
+      quotes_list = Scraper.scrape_quotes_by_author(author)
       answer = 1 
       start = 0 
-      stop = 9 
+      stop = 9
+      error_holder = ''
       while answer == 1 
         quotes_list[start..stop].each_with_index do |quote, index|
-          puts "#{index = 1}"
+          puts "#{index + 1}"
           puts "#{quote.quote}"
           puts 
           puts "#{quote.author.name}"
           puts "Categories".colorize(:yellow)
-          quote.categories.each_with_index{|item, index| puts "#{index + 1}| #{item.catergory}"}
+          quote.categories.each_with_index{|item, index| puts "#{index + 1}| #{item.category}"}
           puts "____________________________________________________________________________"
         end
         puts
-        puts
+        puts  error_holder
         puts "Enter 1 to select a category from a particular quote.".colorize(:green)
         puts "Enter 2 for the next 10 quotes.".colorize(:green)
         puts "Enter 3 to go back to the previous screen.".colorize(:green)
         puts "Enter 4 to browse another letter.".colorize(:green)
         puts "Enter 5 to go back to the main menu".colorize(:green)
-        input - gets.downcase.strip!
+        input = gets.downcase.strip!
         if input == "exit"
           puts "Thanks for visiting. Good bye.".colorize(:magenta)
           exit!
@@ -156,17 +157,22 @@ class CLI
           a = gets.strip!.to_i
           puts "Enter category number from thoe quote."
           b = gets.strip!.to_i
-          q = quotes_list[b -1]
+          q = quotes_list[a - 1]
           top = q.categories[b - 1]
           CLI.display_quotes_by_category(top)
         when 2
-          start += 10
-          stop += 10
-          answer = 1
+          if stop + 10 > quotes_list.count
+            error_holder = "You've reached the end of the list!".colorize(:magenta)
+            error_holder
+            answer = 1 
+          else
+            start += 10
+            stop += 10
+            answer = 1
+          end
         when 3
           if start == 0
-            letter = CLI.choose_letter
-            CLI.display_authors_by_letter(letter)
+            CLI.main_menu
           else
             start -= 10
             stop -= 10
@@ -188,6 +194,7 @@ class CLI
       answer = 1
       start = 0
       stop = 9
+      error_holder = ''
       while answer == 1
       quotes_list[start..stop].each_with_index do |quote, index|
         puts "#{index + 1}"
@@ -199,7 +206,7 @@ class CLI
         puts "_________________________________________________________________________"
       end 
       puts
-      puts
+      puts error_holder
       puts "Enter 1 to select a category from a particular quote.".colorize(:green)
       puts "Enter 2 for the next 10 quotes.".colorize(:green)
       puts "Enter 3 to go back to the previous screen.".colorize(:green)
@@ -217,24 +224,29 @@ class CLI
       case @input 
       when 1 
         puts "Enter quote number."
-        a = get.strip!.to_i
+        a = gets.strip!.to_i
         puts "Enter category number from the quote."
         b = gets.strip!.to_i
         q = quotes_list[a - 1]
         top = q.categories[b - 1]
         CLI.display_quotes_by_category(top)
       when 2 
-        start += 25
-        stop += 25
-        answer = 1
+        if stop + 10 > quotes_list.count
+          error_holder = "You've reached the end of the list!".colorize(:magenta)
+          error_holder
+          answer = 1 
+        else 
+          start += 10
+          stop += 10
+          answer = 1
+        end
       when 3
         if 
           start == 0 
-          letter = CLI.choose_letter
-          CLI.display_authors_by_letter(letter)
+          CLI.main_menu
         else
-          start -= 25
-          stop -= 25
+          start -= 10
+          stop -= 10
           answer = 1
         end
       when 4 
@@ -284,7 +296,7 @@ end
     while answer == 1
       rand_top_authors = authors_list.sample(25)
       rand_top_authors.each_with_index do |author, index|
-        puts "#{index}| #{author}"
+        puts "#{index + 1}| #{author.name}"
       end
     puts
     puts "Enter 1 to select an author you would like to see quotes from.".colorize(:green)
@@ -304,7 +316,7 @@ end
     when 1 
       puts "Enter author number."
       a = gets.strip!.to_i
-      author = rand_top_authors[a - 1].name
+      author = rand_top_authors[a - 1]
       CLI.display_quotes_by_author(author)
     when 2
       answer = 1 
@@ -322,7 +334,7 @@ end
     error_holder = ""
     while answer == 1 
       topics_arr[start..stop].each_with_index do |topic, index|
-        puts "#{index}| #{topic}"
+        puts "#{index + 1}| #{topic.category}"
       end
        puts 
       puts error_holder
@@ -344,11 +356,11 @@ end
         when 1 
           puts "Enter category number."
           a = gets.strip!.to_i
-          category = topics_arr[start + a - 1].category
+          category = topics_arr[start + a - 1]
           CLI.display_quotes_by_category(category)
         when 2 
           if stop > topics_arr.count
-            error_holder = "Please make a different selection."
+            error_holder = "You've reached the end of the list!".colorize(:magenta)
             answer = 1
           else
             start += 25

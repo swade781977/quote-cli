@@ -2,7 +2,7 @@ class Author
   
   @@all_authors = []
   
-  attr_accessor :name, :occupation, :expire_page
+  attr_accessor :name, :occupation, :page
   
   def initialize(name)
     @name = name

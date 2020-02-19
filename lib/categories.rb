@@ -1,6 +1,6 @@
 class Category
   
-  attr_accessor :Category
+  attr_accessor :category
   
   @@category_all = []
   
@@ -17,14 +17,15 @@ class Category
     @@category_all.select{|a| a.category == name}
   end
   
-  def self.search_categories(category)
-    t = @@category_all.find{|a| a.category == category}
-    if t != NIL
-      category = t 
+  def self.search_categories(c)
+    t = @@category_all.find{|a| a.category == c}
+    if t = nil 
+      category = Category.new(c) 
     else
-      category = Category.new(category) 
+       category = t
     end
     category 
+    binding.pry
   end 
   
   def self.get_top_topics
