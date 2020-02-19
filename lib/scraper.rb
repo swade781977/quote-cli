@@ -29,6 +29,7 @@ class Scraper
   def self.scrape_quotes_by_author(author)
     quotes = []
     scribe = Author.all.find{|a| a.name == author}
+    binding.pry
     page = Nokogiri::HTML(open(scribe.page))
     page.css('.m-brick').each do |block|
       category = []
@@ -97,13 +98,35 @@ class Scraper
     base_html = "http://www.brainyquote.com"
     author_page = "http://www.brainyquote.com/authors"
     page = Nokogiri::HTML(open(author_page))
-    page.css(".bqLn").each do |f|
-      name = f.css('a').text 
-      author = Author.search_authors(name)
-      href = f.css('a').attr('href').value
-      author.page = base_html + href
-      top_authors << author
+    page.css(".bqLn").css('a').each do |f|
+      name = f.text
+      a = Author.new(name)
+      top_authors << a
+      hr = f.attr('href')
+      hr = hr.to_s
+      a.page = base_html+hr
     end
     top_authors
+  end
+  
+  def self.scrape_quotes_by_author_for_2(author)
+    quotes = []
+    page = Nokogiri::HTML(open(author.page))
+    page.css('.m-brick').each do |block|
+      category = []
+      category_temp = []
+      quote1 = block.css('a')[0].text
+      quote = Quote.search_quotes(quote1)
+      quotes << quote
+      author1 = block.css('a')[1].text
+      author = Author.search_authors(author1)
+      quote.author = author
+      block.css('.kw-box').css('a').each do |c|
+        a = Category.new(c.text)
+        category << a
+      end
+      quote.categories = category
+    end
+    quotes
   end
 end
